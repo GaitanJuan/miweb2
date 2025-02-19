@@ -42,6 +42,12 @@
             color: white;
             padding: 20px 0;
         }
+        .dashboard {
+            padding: 20px;
+            background-color: #e9ecef;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -60,6 +66,8 @@
                     <li class="nav-item"><a class="nav-link" href="#" onclick="loadPage('servicios.html')">Servicios</a></li>
                     <li class="nav-item"><a class="nav-link" href="#" onclick="loadPage('sensores.html')">Sensores en Tiempo Real</a></li>
                     <li class="nav-item"><a class="nav-link" href="#" onclick="loadPage('contacto.html')">Contacto</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="loadPage('login.html')">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="loadPage('registro.html')">Registro</a></li>
                 </ul>
             </div>
         </div>
@@ -105,6 +113,13 @@
                 </div>
             </div>
         </div>
+
+        <!-- Dashboard de Usuario -->
+        <div id="dashboard" class="dashboard" style="display: none;">
+            <h2>Bienvenido al Dashboard</h2>
+            <p>Aquí puedes ver tus paneles solares y su rendimiento.</p>
+            <div id="dashboard-content"></div>
+        </div>
     </div>
 
     <!-- Footer -->
@@ -121,6 +136,74 @@
                     document.getElementById("content").innerHTML = html;
                 });
         }
+
+        function showDashboard() {
+            document.getElementById("dashboard").style.display = "block";
+            document.getElementById("dashboard-content").innerHTML = "<p>Información del usuario y paneles solares...</p>";
+        }
+
+        // Simulación de autenticación
+        function login() {
+            // Aquí iría la lógica de autenticación
+            showDashboard();
+        }
+
+        function register() {
+            // Aquí iría la lógica de registro
+            alert("Registro exitoso. Por favor, inicia sesión.");
+        }
+
+        // Ejemplo de carga de página de login
+        function loadLoginPage() {
+            document.getElementById("content").innerHTML = `
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <h2>Login</h2>
+                        <form onsubmit="login(); return false;">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Usuario</label>
+                                <input type="text" class="form-control" id="username" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Contraseña</label>
+                                <input type="password" class="form-control" id="password" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                        </form>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Ejemplo de carga de página de registro
+        function loadRegisterPage() {
+            document.getElementById("content").innerHTML = `
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <h2>Registro</h2>
+                        <form onsubmit="register(); return false;">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Usuario</label>
+                                <input type="text" class="form-control" id="username" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Contraseña</label>
+                                <input type="password" class="form-control" id="password" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Registrarse</button>
+                        </form>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Cargar página de login o registro según el enlace clickeado
+        document.querySelector('a[href="#login"]').addEventListener('click', loadLoginPage);
+        document.querySelector('a[href="#registro"]').addEventListener('click', loadRegisterPage);
     </script>
 </body>
 </html>
