@@ -1,5 +1,9 @@
 import os
 
+from dotenv import load_dotenv
+load_dotenv()
+
+
 """
 Django settings for miweb project.
 
@@ -25,7 +29,10 @@ from firebase_admin import credentials
 FIREBASE_CRED = os.path.join(BASE_DIR, 'miweb', 'db.json')
 
 # Inicializar Firebase
+import os
+FIREBASE_CRED = os.getenv("FIREBASE_CRED_PATH", "miweb/db.json")
 cred = credentials.Certificate(FIREBASE_CRED)
+
 firebase_admin.initialize_app(cred)
 
 
