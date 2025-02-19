@@ -1,6 +1,8 @@
+from django.contrib import admin
 from django.urls import path
-from . import views
+from principal import views
 
 urlpatterns = [
-    path('', views.home, name='home'),  # ← Esto enlaza la vista a "/"
+    path('admin/', admin.site.urls),
+    path('', views.home, name='home'),  # Ruta principal
 ]

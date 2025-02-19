@@ -1,3 +1,5 @@
+import os
+
 """
 Django settings for miweb project.
 
@@ -25,7 +27,7 @@ SECRET_KEY = 'django-insecure-a*^zb1i155@8i(r*qlh^)r_m)^@dnsa+4cjic^al2z!+d756ex
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["miweb-hqp6.onrender.com"]
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -55,7 +57,7 @@ ROOT_URLCONF = 'miweb.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

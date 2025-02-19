@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empresa de Mantenimiento Predictivo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+        .navbar {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .hero-section {
+            background: url('templates/SolarGuardian2.png') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .hero-section h1 {
+            font-size: 4rem;
+            font-weight: bold;
+        }
+        .hero-section p {
+            font-size: 1.5rem;
+        }
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .footer {
+            background-color: #343a40;
+            color: white;
+            padding: 20px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#" onclick="loadPage('inicio.html')">Mantenimiento Predictivo</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="loadPage('mision.html')">Misión</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="loadPage('vision.html')">Visión</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="loadPage('servicios.html')">Servicios</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="loadPage('sensores.html')">Sensores en Tiempo Real</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="loadPage('contacto.html')">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="text-center animate__animated animate__fadeIn">
+            <h1>Mantenimiento Predictivo en la Nube</h1>
+            <p>Optimizamos el rendimiento de tus paneles solares con tecnología avanzada en tiempo real.</p>
+            <a href="#servicios" class="btn btn-primary btn-lg">Conoce más</a>
+        </div>
+    </div>
+
+    <!-- Contenido Principal -->
+    <div class="container mt-5" id="content">
+        <div class="row" id="servicios">
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Servicio 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Monitoreo en Tiempo Real</h5>
+                        <p class="card-text">Supervisa el rendimiento de tus paneles solares en tiempo real.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Servicio 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Análisis Predictivo</h5>
+                        <p class="card-text">Anticipa fallos y optimiza el mantenimiento de tus instalaciones.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Servicio 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Reportes Automáticos</h5>
+                        <p class="card-text">Genera reportes detallados y personalizados de tus sistemas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer text-center">
+        <p>&copy; 2023 Empresa de Mantenimiento Predictivo. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function loadPage(page) {
+            fetch(page)
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById("content").innerHTML = html;
+                });
+        }
+    </script>
+</body>
+</html>
