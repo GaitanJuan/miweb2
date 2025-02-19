@@ -23,3 +23,8 @@ def login_view(request):
             return render(request, "login.html", {"error": "Error en la autenticación"})
             
     return render(request, "login.html")
+
+from django.shortcuts import render
+
+def home(request):
+    return render(request, 'home.html')  # Asegúrate de que "index.html" está en "principal/templates/"
