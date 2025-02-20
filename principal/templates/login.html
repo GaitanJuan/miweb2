@@ -4,18 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión</title>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js"></script>
 </head>
 <body>
     <h2>Iniciar Sesión</h2>
     <form id="loginForm">
         <input type="email" id="email" placeholder="Correo electrónico" required>
         <input type="password" id="password" placeholder="Contraseña" required>
-        <button type="button" onclick="login()">Ingresar</button>
+        <button type="submit">Ingresar</button>
     </form>
 
-    <script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        // Configuración de Firebase
         const firebaseConfig = {
             apiKey: "TU_API_KEY",
             authDomain: "TU_PROYECTO.firebaseapp.com",
@@ -25,30 +27,48 @@
             appId: "TU_APP_ID"
         };
 
-        firebase.initializeApp(firebaseConfig);
+        // Inicializar Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
 
+        // Función de inicio de sesión
         function login() {
-            const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value.trim();
 
-            firebase.auth().signInWithEmailAndPassword(email, password)
+            if (!email || !password) {
+                alert("Por favor, complete todos los campos.");
+                return;
+            }
+
+            signInWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
-                    userCredential.user.getIdToken().then((idToken) => {
-                        fetch("/login/", {
-                            method: "POST",
-                            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                            body: `idToken=${idToken}`
-                        }).then(response => {
-                            if (response.ok) {
-                                window.location.href = "/dashboard/";  // Redirigir tras login
-                            }
-                        });
+                    return userCredential.user.getIdToken();
+                })
+                .then((idToken) => {
+                    return fetch("/login/", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                        body: `idToken=${idToken}`
                     });
+                })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = "/dashboard/";
+                    } else {
+                        throw new Error("Error en la autenticación en el backend");
+                    }
                 })
                 .catch((error) => {
                     alert("Error al iniciar sesión: " + error.message);
                 });
         }
+
+        // Capturar el evento de envío del formulario
+        document.getElementById("loginForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+            login();
+        });
     </script>
 </body>
 </html>
